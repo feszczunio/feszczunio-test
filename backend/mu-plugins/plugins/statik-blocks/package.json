@@ -1,0 +1,160 @@
+{
+  "name": "root",
+  "version": "4.18.1",
+  "private": true,
+  "description": "Statik plugin for manage Gutenberg Blocks.",
+  "license": "GPL-3.0-or-later",
+  "config": {
+    "IS_GUTENBERG_PLUGIN": true
+  },
+  "engines": {
+    "node": "16"
+  },
+  "workspaces": [
+    "packages/@statik-space/wp-statik-editor-plugin",
+    "packages/@statik-space/wp-statik-editor-utils",
+    "packages/@statik-space/wp-statik-utils"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run packages:build && npm run blocks:build",
+    "blocks:clean": "rimraf ./blocks/*/*/build",
+    "blocks:dev": "npm run blocks:clean && wp-scripts start --config-name blocks",
+    "blocks:prebuild": "node ./tools/block-icon-prebuild.js",
+    "blocks:build": "npm run blocks:clean && wp-scripts build --config-name blocks",
+    "packages:clean": "rimraf ./build",
+    "packages:build:internal": "npm run build --workspaces --if-present",
+    "packages:build:webpack": "wp-scripts build --config-name packages",
+    "packages:build": "run-s packages:build:internal packages:build:webpack",
+    "packages:dev:internal": "npm run watch --workspaces --if-present",
+    "packages:dev:webpack": "wp-scripts start --config-name packages",
+    "packages:dev": "run-s packages:clean packages:build:internal && run-p packages:dev:internal packages:dev:webpack",
+    "check-engines": "wp-scripts check-engines",
+    "lint:css": "wp-scripts lint-style",
+    "lint:css:fix": "wp-scripts lint-style --fix",
+    "lint:js": "wp-scripts lint-js",
+    "lint:js:fix": "wp-scripts lint-js --fix",
+    "lint:php": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run",
+    "lint:php:fix": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix",
+    "format": "wp-scripts format",
+    "packages-update": "wp-scripts packages-update",
+    "test:e2e:debug": "wp-scripts --inspect-brk test-e2e --config packages/e2e-tests/jest.config.js --puppeteer-devtools",
+    "test:e2e:watch": "npm run test:e2e -- --watch",
+    "test:e2e": "wp-scripts test-e2e",
+    "wp-env": "wp-env",
+    "wp-env:prestart": "bash ./scripts/wp-env-prestart.sh",
+    "wp-env:start": "wp-env start",
+    "wp-env:poststart": "bash ./scripts/wp-env-poststart.sh",
+    "wp-env:stop": "wp-env stop",
+    "wp-env:clean": "wp-env clean all",
+    "wp-env:destroy": "wp-env destroy",
+    "clean": "npm run blocks:clean && npm run packages:clean",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "@release-it/conventional-changelog": "^5.1.1",
+    "@wordpress/base-styles": "4.34.0",
+    "@wordpress/block-editor": "^12.14.0",
+    "@wordpress/blocks": "^12.4.0",
+    "@wordpress/components": "^25.12.0",
+    "@wordpress/data": "^8.4.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^4.12.0",
+    "@wordpress/e2e-test-utils": "^10.2.0",
+    "@wordpress/element": "^5.4.0",
+    "@wordpress/env": "^5.16.0",
+    "@wordpress/eslint-plugin": "^14.0.0",
+    "@wordpress/hooks": "^3.27.0",
+    "@wordpress/i18n": "^4.27.0",
+    "@wordpress/icons": "^9.18.0",
+    "@wordpress/keycodes": "^3.27.0",
+    "@wordpress/media-utils": "^4.18.0",
+    "@wordpress/plugins": "^5.4.0",
+    "@wordpress/postcss-plugins-preset": "^4.11.0",
+    "@wordpress/scripts": "^26.2.0",
+    "@wordpress/stylelint-config": "^21.10.0",
+    "babel-jest": "^29.5.0",
+    "camelcase": "^6.3.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "expose-loader": "^4.0.0",
+    "fs-extra": "^11.1.0",
+    "globby": "^11.0.4",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "npm-run-all": "^4.1.5",
+    "regenerator-runtime": "^0.13.11",
+    "release-it": "^15.11.0",
+    "rimraf": "^5.0.0",
+    "uuid": "^3.3.3",
+    "webpack": "^5.74.0"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.0.5",
+    "@dnd-kit/modifiers": "^6.0.0",
+    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/utilities": "^3.2.0",
+    "@googlemaps/js-api-loader": "^1.15.1",
+    "@react-google-maps/api": "^2.13.1",
+    "@statik-space/wp-statik-editor-plugin": "file:packages/@statik-space/wp-statik-editor-plugin",
+    "@statik-space/wp-statik-editor-utils": "file:packages/@statik-space/wp-statik-editor-utils",
+    "@statik-space/wp-statik-utils": "file:packages/@statik-space/wp-statik-utils",
+    "@wordpress/api-fetch": "^6.24.0",
+    "classnames": "^2.3.2",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.7",
+    "fast-average-color": "9.1.1",
+    "iconoir": "^6.2.1",
+    "lodash": "^4.17.21",
+    "memize": "^1.1.0",
+    "micromodal": "^0.4.10",
+    "query-string": "^7.1.1",
+    "react-window": "^1.8.8",
+    "remove-accents": "^0.4.3",
+    "rot-13": "^1.0.0",
+    "swiper": "^8.4.2",
+    "webpack-merge": "^5.8.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore(release): v${version}",
+      "tagName": "v${version}",
+      "push": true,
+      "commit": true,
+      "tag": true,
+      "requireBranch": [
+        "main"
+      ],
+      "requireCommits": false,
+      "requireCleanWorkingDir": false
+    },
+    "github": {
+      "release": true,
+      "releaseName": "v${version}",
+      "assets": [
+        "statik-blocks*v${version}.zip"
+      ],
+      "draft": true
+    },
+    "npm": {
+      "publish": false,
+      "ignoreVersion": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "conventionalcommits",
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "hooks": {
+      "before:release": [
+        "bash ./scripts/build-prod.sh ${version}",
+        "bash ./scripts/pack-prod.sh statik-blocks-ecosystem.v${version}.zip",
+        "bash ./scripts/cleanup-prod.sh",
+        "bash ./scripts/pack-prod.sh statik-blocks.v${version}.zip"
+      ],
+      "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    }
+  }
+}

@@ -1,0 +1,177 @@
+.wp-block-statik-video-cards {
+	--wp-block-statik-video-cards--attr--cardsPerRow: 3;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.wp-block-statik-video-cards {
+
+	.wp-block-statik-video-cards__card {
+		flex: 0 0 calc(100% / var(--wp-block-statik-video-cards--attr--cardsPerRow) - 30px);
+	}
+}
+
+.wp-block-statik-video-cards__card {
+	min-width: 0;
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin: 15px;
+	padding: 15px;
+	border: 1px solid #e5e5e5;
+	background-color: #fff;
+}
+
+.wp-block-statik-video-cards__image {
+	flex: 0 0 100%;
+}
+
+.wp-block-statik-video-cards__categories {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	li {
+		margin-right: 5px;
+	}
+}
+
+.wp-block-statik-video-cards__updated {
+	margin-left: auto;
+}
+
+.wp-block-statik-video-cards__title {
+	flex: 0 0 100%;
+}
+
+.wp-block-statik-video-cards__excerpt {
+	flex: 0 0 100%;
+}
+
+.wp-block-statik-video-cards__tags {
+	display: flex;
+	flex: 0 0 100%;
+	list-style: none;
+	padding: 0;
+
+	li {
+		margin-right: 5px;
+	}
+}
+
+.wp-block-statik-video-cards__read-more {
+
+}
+
+.wp-block-statik-video-cards__play-button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	border: 0;
+	color: #000;
+	fill: #000;
+
+	svg {
+		width: 100px;
+		height: auto;
+		fill: #fff;
+		background: #222;
+		border-radius: 50%;
+		border: 2px solid #222;
+	}
+}
+
+
+// Modal styles
+
+
+.modal__overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal__close {
+	background-color: transparent !important;
+	border: 0;
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	position: absolute;
+	top: -35px;
+	right: -35px;
+}
+
+.modal__close::before {
+	color: white;
+	content: "⤬";
+}
+
+.modal__content {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	line-height: 1.5;
+	color: rgba(0, 0, 0, 0.8);
+	position: relative;
+	background-color: #000;
+}
+
+
+/**************************\
+  Animation Style
+\**************************/
+@keyframes fadeInAnimation {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOutAnimation {
+
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+
+.micromodal-slide {
+	display: none;
+}
+
+.micromodal-slide.is-open {
+	display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+	animation: fadeInAnimation 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+	animation: fadeOutAnimation 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide .modal__overlay {
+	will-change: transform;
+}
+
