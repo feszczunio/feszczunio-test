@@ -1,0 +1,31 @@
+.archive-search {
+  display: grid;
+  gap: 30px;
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 50px 0 15px;
+}
+
+.archive-search__params {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.archive-search__select {
+  margin-bottom: 15px;
+  background: var(--color-primary-contrast)
+}
+
+.archive-search__checkbox {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  input[type='checkbox'] {
+    min-width: auto;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}

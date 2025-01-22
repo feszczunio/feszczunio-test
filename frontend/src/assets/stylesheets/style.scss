@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+@import '@commons/style';
+
+table {
+  width: 100%;
+  max-width: 1100px;
+  border-collapse: collapse;
+  margin: 50px auto;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.search-params {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  .form-control {
+    display: flex;
+    margin-bottom: 10px;
+    input[type='checkbox'] {
+      min-width: auto;
+      width: 20px !important;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  }
+}

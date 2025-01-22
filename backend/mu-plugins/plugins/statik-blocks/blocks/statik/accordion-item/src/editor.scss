@@ -1,0 +1,13 @@
+.wp-block-statik-accordion-item__body {
+  height: auto;
+  overflow: auto;
+  transition: none;
+}
+
+.wp-block-statik-accordion-item--expanded {
+  .wp-block-statik-accordion-item__icon {
+    width: 24px;
+    transition: none;
+    transform: none;
+  }
+}
